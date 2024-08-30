@@ -1,0 +1,1 @@
+# AI_trendbook_front
