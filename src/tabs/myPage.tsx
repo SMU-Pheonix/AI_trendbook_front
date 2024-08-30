@@ -8,6 +8,18 @@ import '../App.css';
 
 export default function ApplyStudy() {
     const [mypageList, setMypageList] = useState('내 정보');
+    const [selectedCategories, setSelectedCategories] = useState([]);
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategories(prev => {
+            if (prev.includes(category)) {
+                return prev.filter(c => c !== category);
+            } else if (prev.length < 4) {
+                return [...prev, category];
+            }
+            return prev;
+        });
+    };
 
     return (
         <div>
@@ -184,46 +196,49 @@ export default function ApplyStudy() {
                                         </div>
                                     </div>
                                 ) : mypageList === '카테고리 및 링크' ? (
-                                    <form style={{width:'50%', marginTop:'40px'}}>
-        <div style={{color: '#fff', marginBottom: '20px', fontSize: '18px', fontFamily: 'Pretendard-SemiBold'}}>
-            관심 카테고리 선택 (최대 4개)
-        </div>
-        {['AI', '주식', '스포츠', '엔터테인먼트', '기술', '정치', '경제', '과학', '건강', '여행'].map((category, index) => (
-            <div key={index} style={{marginBottom: '10px'}}>
-                <input 
-                    type="checkbox" 
-                    id={`category-${index}`} 
-                    name="category" 
-                    value={category}
-                    style={{marginRight: '10px'}}
-                    onChange={(e) => {
-                        const checkboxes = document.querySelectorAll('input[name="category"]:checked');
-                        if (checkboxes.length > 4) {
-                            e.target.checked = false;
-                        }
-                    }}
-                />
-                <label htmlFor={`category-${index}`} style={{color: '#fff', fontFamily: 'Pretendard-Regular'}}>
-                    {category}
-                </label>
-            </div>
-        ))}
-        <button 
-            type="submit" 
-            style={{
-                marginTop: '20px',
-                padding: '10px 20px',
-                backgroundColor: '#E64D3D',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                fontFamily: 'Pretendard-SemiBold'
-            }}
-        >
-            저장
-        </button>
-    </form>
+                                    <form style={{width:'50%', marginTop:'40px'}} onSubmit={(e) => {
+                                        e.preventDefault();
+                                        console.log('선택된 카테고리:', selectedCategories);
+                                        // 여기에 선택된 카테고리를 처리하는 로직을 추가하세요
+                                    }}>
+                                        <div style={{color: '#fff', marginBottom: '20px', fontSize: '18px', fontFamily: 'Pretendard-SemiBold'}}>
+                                            관심 카테고리 선택 (최대 4개)
+                                        </div>
+                                        {['AI', '주식', '스포츠', '엔터테인먼트', '기술', '정치', '경제', '과학', '건강', '여행'].map((category, index) => (
+                                            <div key={index} style={{marginBottom: '10px'}}>
+                                                <label className="custom-checkbox">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        name="category" 
+                                                        value={category}
+                                                        checked={selectedCategories.includes(category)}
+                                                        onChange={() => handleCategoryChange(category)}
+                                                    />
+                                                    <span className="checkmark"></span>
+                                                </label>
+                                                
+                                                <span style={{color: '#fff', fontFamily: 'Pretendard-Regular', marginLeft: '50px'}}>
+                                                    {category}
+                                                </span>
+                                            </div>
+                                        ))}
+                                        <button 
+                                            type="submit" 
+                                            style={{
+                                                marginTop: '20px',
+                                                padding: '10px 20px',
+                                                backgroundColor: '#E64D3D',
+                                                color: '#fff',
+                                                border: 'none',
+                                                borderRadius: '5px',
+                                                cursor: 'pointer',
+                                                fontFamily: 'Pretendard-SemiBold'
+                                            }}
+                                            onClick={()=>{window.location.reload()}}
+                                        >
+                                            저장
+                                        </button>
+                                    </form>
                                 ) : (<></>)
                                 }
                             </div>

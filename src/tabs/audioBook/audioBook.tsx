@@ -6,7 +6,7 @@ import Nav from '../../components/nav.tsx';
 import BottomInfo from '../../components/bottomInfo.tsx';
 import '../../App.css';
 
-export default function ApplyStudy() {
+export default function AudioBook() {
     const [audioList, setAudioList] = useState('AI');
 
     return (
@@ -41,7 +41,7 @@ export default function ApplyStudy() {
                                 textAlign: 'right',
                             }}
                         >
-                            오디오북
+                            트렌드북
                             <div
                                 style={{
                                     marginTop: '40px',
@@ -61,21 +61,21 @@ export default function ApplyStudy() {
 
                                 <div
                                     className="post_tabs"
-                                    style={audioList === 'Stock' ? { color: '#E64D3D' } : {}}
+                                    style={audioList === '주식' ? { color: '#E64D3D' } : {}}
                                     onClick={() => {
-                                        setAudioList('Stock');
+                                        setAudioList('주식');
                                     }}
                                 >
-                                    Stock
+                                    주식
                                 </div>
                                 <div
                                     className="post_tabs"
-                                    style={audioList === 'Sports' ? { color: '#E64D3D' } : {}}
+                                    style={audioList === '스포츠' ? { color: '#E64D3D' } : {}}
                                     onClick={() => {
-                                        setAudioList('Sports');
+                                        setAudioList('스포츠');
                                     }}
                                 >
-                                    Sports
+                                    스포츠
                                 </div>
                             </div>
                         </div>
@@ -112,13 +112,30 @@ export default function ApplyStudy() {
                             >
                                 {audioList === 'AI' ? (
                                     <div>AI</div>
-                                ) : audioList === 'Stock' ? (
-                                    <div>Stock</div>
-                                ) : audioList === 'Sports' ? (
-                                    <div>Sports</div>
+                                ) : audioList === '주식' ? (
+                                    <div>주식</div>
+                                ) : audioList === '스포츠' ? (
+                                    <div>스포츠</div>
                                 ) : (<></>)
                                 }
                             </div>
+                            <a href="http://3.38.151.129:5000/" target="_blank">
+                                <button 
+                                    type="button" 
+                                    style={{
+                                        marginTop: '80px',
+                                        padding: '10px 20px',
+                                        backgroundColor: '#E64D3D',
+                                        color: '#fff',
+                                         border: 'none',
+                                        borderRadius: '5px',
+                                        cursor: 'pointer',
+                                        fontFamily: 'Pretendard-SemiBold'
+                                    }}
+                                >
+                                    음성 듣기
+                                </button>
+                            </a>
                         </div>
                     </motion.div>
                 </div>

@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import moment from 'moment';
 import Button from '../../components/button.tsx';
 import Nav from '../../components/nav.tsx';
 import BottomInfo from '../../components/bottomInfo.tsx';
+import SmallCalendar from '../../components/smallCalendar.tsx';
+import DateData from '../../mockup_data/date_data.tsx';
 import '../../App.css';
 
 export default function Knowledge() {
+    const today = new Date();
+    const [selectedDate, setSelectedDate] = useState<Date>(today);
+    const data = DateData();
+
+    const handleDateSelect = (selectedDate: Date) => {
+        setSelectedDate(selectedDate);
+    };
+
     return (
         <div>
             <Nav type="dataCenter" />
@@ -26,11 +37,11 @@ export default function Knowledge() {
                             position: 'relative',
                             width: '400px',
                             borderRight: '1px solid #444',
-                            textAlign: 'left',
+                            textAlign: 'right',
                         }}
                     >
                         <div style={{
-                                width: '140px',
+                                width: '250px',
                                 fontFamily: 'Pretendard-Bold',
                                 fontSize: '30px',
                                 color: '#fff',
@@ -38,6 +49,15 @@ export default function Knowledge() {
                                 right: '50px',
                             }}>
                                 요약 내역
+                                <div
+                                style={{
+                                    marginTop: '40px',
+                                    fontFamily: 'Pretendard-Regular',
+                                    fontSize: '16px',
+                                }}
+                            >
+                                <SmallCalendar onDateSelect={handleDateSelect} />
+                            </div>
                             </div>
                     </motion.div>
 
@@ -59,6 +79,43 @@ export default function Knowledge() {
                         }}
                     >
                         <div style={{ width: '810px', position: 'absolute', left: '60px' }}>
+                            <div
+                                style={{
+                                    width: '100%',
+                                    fontFamily: 'Pretendard-Bold',
+                                    fontSize: '30px',
+                                    color: '#fff',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                {moment(selectedDate).format('YYYY-MM-DD')} 요약
+                            </div>
+                            
+                            <div
+                                style={{
+                                    marginTop:'40px',
+                                    fontFamily: 'Pretendard-Regular',
+                                    fontSize: '18px',
+                                    color: '#fff',
+                                    lineHeight:'25px',
+                                }}
+                            >
+                                <pre
+                                    style={{
+                                        marginTop:'40px',
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '17px',
+                                        color: '#fff',
+                                        lineHeight:'30px',
+                                    }}
+                                >
+                                    {data.filter((data) => data.date === moment(selectedDate).format('YYYY-MM-DD')).length !== 0 ?
+                                        data.filter((data) => data.date === moment(selectedDate).format('YYYY-MM-DD'))[0].content
+                                    : (<></>)}
+                                </pre>
+                            </div>
                         </div>
                     </motion.div>
                 </div>

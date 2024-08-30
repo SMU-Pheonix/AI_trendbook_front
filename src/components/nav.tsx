@@ -73,7 +73,7 @@ export default function Nav(props: NavType) {
                                 : {}
                         }
                     >
-                        Audio Book
+                        Trend Book
                     </div>
                     <div
                         className="nav_text"
@@ -189,7 +189,7 @@ export default function Nav(props: NavType) {
                         onMouseLeave={() => setCurrentFocus('')}
                     >
                         <Link to="/audioBook" style={{ textDecoration: 'none' }}>
-                            <div className="nav_tabs">오디오북</div>
+                            <div className="nav_tabs">트렌드북</div>
                         </Link>
                     </div>
                     <div
@@ -212,9 +212,11 @@ export default function Nav(props: NavType) {
                         <Link to="/postBoard" style={{ textDecoration: 'none' }} onClick={() => sessionStorage.clear()}>
                             <div className="nav_tabs">공지사항</div>
                         </Link>
+                        {/* 
                         <Link to="/fAQ" style={{ textDecoration: 'none' }}>
                             <div className="nav_tabs">FAQ</div>
                         </Link>
+                        */}
                     </div>
                 </div>
             </div>
